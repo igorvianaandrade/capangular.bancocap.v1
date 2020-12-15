@@ -34,8 +34,6 @@ import { LoginComponent } from './components/login/login.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { recuperarSenhaComponent } from './components/recuperarSenha/recuperarSenha.component';
 import { HttpClientModule } from '@angular/common/http';
-
-
 import { CurrencyMaskConfig, CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
 import { AgGridModule } from 'ag-grid-angular';
 
@@ -53,9 +51,6 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 //Data local
 import { registerLocaleData } from '@angular/common';
 import localeBr from '@angular/common/locales/pt';
-import { DepositoViewComponent } from './components/deposito/deposito-view/deposito-view.component';
-import { SaqueViewComponent } from './components/saque/saque-view/saque-view.component';
-import { TransferenciaViewComponent } from './components/transferencia/transferencia-view/transferencia-view.component';
 registerLocaleData(localeBr, 'pt');
 
 const maskConfig: Partial<IConfig> = {
@@ -80,10 +75,7 @@ const maskConfig: Partial<IConfig> = {
     DepositoComponent,
     SaqueComponent,
     TransferenciaComponent,
-    ExtratoComponent, 
-    DepositoViewComponent, 
-    SaqueViewComponent ,
-    TransferenciaViewComponent
+    ExtratoComponent
   ],
   imports: [
     BrowserModule,
@@ -104,6 +96,7 @@ const maskConfig: Partial<IConfig> = {
     CurrencyMaskModule,
     AgGridModule,
     NgxMaskModule.forRoot(maskConfig),
+    
   ],
   providers: [{provide: LOCALE_ID, useValue: 'pt-BR'},
               { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }],

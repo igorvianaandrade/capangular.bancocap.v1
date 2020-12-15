@@ -1,3 +1,4 @@
+  
 import { Conta } from "./conta.model";
 
 export interface Transferencia {    

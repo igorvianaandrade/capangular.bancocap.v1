@@ -10,69 +10,69 @@ import { Transferencia } from 'src/app/model/transferencia.model';
   styleUrls: ['./extrato.component.css']
 })
 export class ExtratoComponent implements OnInit {    
-  options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-  dataAtual = new Date().toLocaleDateString('pt-BR', this.options);
+  currentDate = new Date().toLocaleDateString();
 
-  mock_extrato_deposito: Extrato = {
-    data: '14/12/2020',
-    valor: 2000.00,
-    operacaoDeposito: {
-      data: '14/12/2020',
-      valor: 2000.00, 
-      hash: 'ge9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3',  
-      conta: {
-        hash: 'de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3',
-        cliente:{
-          cpf: '341.000.658-44', 
-          nome: "Sophie"
-        },
-        saldo: 0.00
-      }
+  extrato: Extrato = {data: '', valor: 0, tipoOperacao: '', hashOrigem: ''};
+
+  saque: Saque ={
+    data: '13/12/2020 08:08:32',
+    valor: 10,
+    conta: {
+      hash: '4d73157b6a4d824733a9a4853be98643cfd4b40e',
+      cliente:{
+        nome:'IGOR VIANA ANDRADE',
+        cpf:'123.456.789-12'
+      },
+      saldo:1000000
     }
   }
 
-  mock_extrato_saque: Extrato = {
-    data: '14/12/2020',
-    valor: 2000.00,
-    operacaoSaque: {
-      data: '14/12/2020',
-      valor: 2000.00, 
-      hash: 'ge9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3',
-      conta: {
-        hash: 'de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3',
-        cliente:{
-          cpf: '341.000.658-44', 
-          nome: "Sophie"
-        },
-        saldo: 10000.00
-      }
+  deposito: Deposito ={
+    data: '13/12/2020 10:40:32',
+    valor: 400,    
+    conta: {
+      hash: '4r73157b6a4d824733a9a4853be98643cfd4b40e',
+      cliente:{
+        nome:'MANUEL DA PADARIA',
+        cpf:'123.456.789-17'
+      },
+      saldo:1000000
     }
   }
 
-  mock_extrato_transferencia: Extrato = {
-    data: '14/12/2020',
-    valor: 2000.00,
-    operacaoTransferencia: {
-      data: '14/12/2020',
-      valor: 2000.00,   
-      contaOrigem: {
-        hash: 'de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3',
-        cliente:{
-         cpf: '341.000.658-44', 
-         nome: "Sophie"
-        },
-        saldo: 10000.00
-     },
-       contaDestino: {
-       hash: '5e9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3',
-       cliente:{
-          cpf: '441.000.600-44', 
-          nome: "Marcus"
-        },
-        saldo: 10000.00
-       }
+  transferencia: Transferencia ={
+    data: '14/12/2020 07:05:20',
+    valor: 800,    
+    contaOrigem: {
+      hash: '4r73159b6a4d824733a9a4853be98643cfd4b40e',
+      cliente:{
+        nome:'JACI SIVA',
+        cpf:'123.456.789-87'
+      },
+      saldo:1000000
+    },
+    contaDestino: {
+      hash: '4d73157b6a4d824733a9a4853be98643cfd4b40e',
+      cliente:{
+        nome:'IGOR VIANA ANDRADE',
+        cpf:'123.456.789-12'
+      },
+      saldo:10000
     }
   }
+
+  columnDefs = [    
+    { field: 'data', sortable: true, filter: true  },
+    { field: 'valor', sortable: true, filter: true },
+    { field: 'tipoOperacao', sortable: true, filter: true },
+    { field: 'hashOrigem', sortable: true, filter: true }
+  ];
+
+  rowData : Array<Extrato> = [
+    {data: this.saque.data, valor: this.saque.valor, tipoOperacao: 'Saque', hashOrigem:''},
+    {data: this.deposito.data, valor: this.deposito.valor, tipoOperacao: 'Depósito', hashOrigem:''},
+    {data: this.transferencia.data, valor: this.transferencia.valor, tipoOperacao: 'Transferência', hashOrigem:this.transferencia.contaOrigem.hash},
+  ];
 
   constructor() { }
 

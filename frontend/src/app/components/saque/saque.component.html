@@ -1,37 +1,37 @@
 <mat-card>
     <div *ngIf="saqueForm.invalid && saqueForm.dirty"
-        class="alert alert-danger div-item-obrigatorio">
+        class="alert alert-danger">
         Preencha todos os campos corretamente!
     </div>
 
-    <mat-card-title>Sacar</mat-card-title>
-    <form  #saqueForm="ngForm" autocomplete="off" >
-        <mat-label class="data-atual">{{dataAtual}}</mat-label>
+    <mat-card-title>Realizar Saque</mat-card-title>
+    <form (ngSubmit)="onSubmit(saqueForm)" #saqueForm="ngForm" autocomplete="off" >
+        <div><b>Data:</b> {{currentDate}}</div>
         <br>
         <mat-form-field>
-            <input matInput placeholder="Hash"  type="text"          
+            <input matInput placeholder="Hash"            
             required
             [(ngModel)]="saque.conta.hash" name="hash" #hash="ngModel"
-            minlength="10" maxlength="10">
+            minlength="40" maxlength="40">
         </mat-form-field>
         <div [hidden]="hash.valid || hash.pristine"
-            class="alert alert-danger div-item-obrigatorio">
-            Hash é obrigatório e deve ter 10 caracteres!
+            class="alert alert-danger">
+            Hash é obrigatório e deve ter 40 caracteres!
         </div>
         <mat-form-field>
-            <input matInput  placeholder="R$ "
+            <input matInput currencyMask placeholder="Valor"
             required
-            min="1" max="2000.00" type="number"
+            min="1" max="1000.00"
             [(ngModel)]="saque.valor" name="valor" #valor="ngModel">
             <div [hidden]="valor.valid || valor.pristine"
-                class="alert alert-danger div-item-obrigatorio">
-                Valor é obrigatório e deve ser acima de R$ 0.00!
+                class="alert alert-danger">
+                Valor é obrigatório e deve ser acima de 0, até R$1.000,00!
             </div>
         </mat-form-field>        
     </form>
 
     <button type="submit" mat-raised-button [disabled]="!saqueForm.form.valid"
-            routerLink = '/saque-view' color="primary" (click)="sacar()">
+            routerLink = {{this.rotaNovoSaque}} color="primary">
             Salvar
     </button>
 

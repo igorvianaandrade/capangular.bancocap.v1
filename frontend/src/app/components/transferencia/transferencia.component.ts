@@ -8,10 +8,9 @@ import { Transferencia } from 'src/app/model/transferencia.model';
   styleUrls: ['./transferencia.component.css']
 })
 export class TransferenciaComponent implements OnInit {  
-  options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-  dataAtual = new Date().toLocaleDateString('pt-BR', this.options);
-  hashOrigem: any;
-  hashDestino: any;
+  rotaNovaTransferencia:string = '/transferencias-view';
+  submitted = false;
+  currentDate = new Date().toLocaleDateString();
 
   transferencia: Transferencia ={
     data: '',
@@ -39,11 +38,10 @@ export class TransferenciaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  transferir(){
-    alert("Transferência realizada com sucesso!");
-    this.transferencia.contaOrigem.hash = this.hashOrigem;
-    this.transferencia.contaDestino.hash = this.hashDestino;
-    console.log(this.transferencia);
-  }
+  onSubmit(form: NgForm) {
+
+    this.submitted = true;
+    
+  } 
 
 }

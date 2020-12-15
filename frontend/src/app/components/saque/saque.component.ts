@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Saque } from 'src/app/model/saque.model';
 
 @Component({
@@ -7,21 +8,20 @@ import { Saque } from 'src/app/model/saque.model';
   styleUrls: ['./saque.component.css']
 })
 export class SaqueComponent implements OnInit {  
-  options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-  dataAtual = new Date().toLocaleDateString('pt-BR', this.options);
-  hash: any;
+  rotaNovoSaque:string = '/saques-view';
+  submitted = false;
+  currentDate = new Date().toLocaleDateString();
 
   saque: Saque ={
     data: '',
-    valor: 0,
-    hash: '',
+    valor: 0,    
     conta: {
       hash: '',
       cliente:{
-        nome:'',
-        cpf:''
+        nome:'IGOR VIANA ANDRADE',
+        cpf:'123.456.789-12'
       },
-      saldo: 0.0
+      saldo:1000000
     }
   }
 
@@ -30,11 +30,10 @@ export class SaqueComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  sacar(): void {
-    alert("Saque efetuado com sucesso!");
-    this.saque.hash = this.hash;
-    console.log(this.saque);
-  }
+  onSubmit(form: NgForm) {
 
+    this.submitted = true;
+    
+  } 
 
 }

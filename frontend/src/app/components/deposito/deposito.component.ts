@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Deposito } from 'src/app/model/deposito.model';
-import * as objectHash from 'object-hash';
 
 @Component({
   selector: 'app-deposito',
@@ -9,21 +8,20 @@ import * as objectHash from 'object-hash';
   styleUrls: ['./deposito.component.css']
 })
 export class DepositoComponent implements OnInit {  
-  options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-  dataAtual = new Date().toLocaleDateString('pt-BR', this.options);
-  hash: any;
+  rotaNovoDeposito:string = '/depositos-view';
+  submitted = false;
+  currentDate = new Date().toLocaleDateString();
 
   deposito: Deposito ={
     data: '',
-    hash: '',
     valor: 0,    
     conta: {
       hash: '',
       cliente:{
-        cpf: '', 
-        nome: ''
+        nome:'IGOR VIANA ANDRADE',
+        cpf:'123.456.789-12'
       },
-      saldo: 0.00
+      saldo:1000000
     }
   }
 
@@ -32,10 +30,10 @@ export class DepositoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  cadastrarDeposito(): void {
-    alert("Depósito criado com sucesso!");
-    this.deposito.hash = this.hash;
-    console.log(this.deposito);
-  }
+  onSubmit(form: NgForm) {
+
+    this.submitted = true;
+    
+  } 
 
 }

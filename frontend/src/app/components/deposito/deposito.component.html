@@ -1,35 +1,37 @@
 <mat-card>
     <div *ngIf="depositoForm.invalid && depositoForm.dirty"
-        class="alert alert-danger div-item-obrigatorio">
+        class="alert alert-danger">
         Preencha todos os campos corretamente!
     </div>
-    <mat-card-title>Depósito</mat-card-title>
-    <form #depositoForm="ngForm" autocomplete="off" >
-        <mat-label class="data-atual">{{dataAtual}}</mat-label>
+
+    <mat-card-title>Realizar Depósito</mat-card-title>
+    <form (ngSubmit)="onSubmit(depositoForm)" #depositoForm="ngForm" autocomplete="off" >
+        <div><b>Data:</b> {{currentDate}}</div>
         <br>
         <mat-form-field>
-            <input matInput placeholder="Hash" type="text"     
+            <input matInput placeholder="Hash"            
             required
-            [(ngModel)]="deposito.hash" name="hash" #hash="ngModel"
-            minlength="10" maxlength="100">
+            [(ngModel)]="deposito.conta.hash" name="hash" #hash="ngModel"
+            minlength="40" maxlength="40">
         </mat-form-field>
         <div [hidden]="hash.valid || hash.pristine"
-            class="alert alert-danger div-item-obrigatorio">
-            Hash obrigatório e deve ter 10 caracteres!
+            class="alert alert-danger">
+            Hash é obrigatório e deve ter 40 caracteres!
         </div>
         <mat-form-field>
-            <input matInput placeholder="R$ " type="number"
-            required min="1"
+            <input matInput currencyMask placeholder="Valor"
+            required
+            min="1" max="1000.00"
             [(ngModel)]="deposito.valor" name="valor" #valor="ngModel">
             <div [hidden]="valor.valid || valor.pristine"
-                class="alert alert-danger div-item-obrigatorio">
-                Valor é obrigatório acima de R$ 0.00!
+                class="alert alert-danger">
+                Valor é obrigatório e deve ser acima de 0, até R$1.000,00!
             </div>
         </mat-form-field>        
     </form>
 
     <button type="submit" mat-raised-button [disabled]="!depositoForm.form.valid"
-            routerLink ='/deposito-view' color="primary" (click)="cadastrarDeposito()">
+            routerLink = {{this.rotaNovoDeposito}} color="primary">
             Salvar
     </button>
 

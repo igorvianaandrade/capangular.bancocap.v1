@@ -1,17 +1,34 @@
-<mat-card>
-  <mat-card-title>Detalhes do Depósito</mat-card-title>
+<mat-card>    
+  <mat-card-title>Extrato do Cliente</mat-card-title>
   
-  <mat-grid-list cols="2" rowHeight="8:1">
-      <mat-grid-tile class="item"><strong>Data</strong></mat-grid-tile>
-      <mat-grid-tile class="item-exibido">{{mock_extrato_deposito.data}}</mat-grid-tile>  
-      <mat-grid-tile class="item"><strong>Operação</strong></mat-grid-tile>
-      <mat-grid-tile class="item-exibido">Depósito</mat-grid-tile>    
-      <mat-grid-tile class="item"><strong>Valor:</strong></mat-grid-tile>
-      <mat-grid-tile>{{mock_extrato_deposito.valor}}</mat-grid-tile>       
-  </mat-grid-list>
+  <div class="table-striped">
+      <table class="table" border="1">
+          <tr>
+            <td><b>Data</b></td>
+            <td><b>Valor</b></td>
+            <td><b>Operação</b></td>
+            <td><b>Hash</b></td>              
+          </tr>
+        
+          <tr *ngFor="let operacao of rowData">
+            <td>{{operacao.data}}</td>
+            <td>{{operacao.valor | currency:'BRL':true}}</td>
+            <td>{{operacao.tipoOperacao}}</td>
+            <td>{{operacao.hashOrigem}}</td>
+          </tr>
+        </table>
+  </div>
+<br><br><br>
+<span>Com o componente AGRID:</span>
+<ag-grid-angular
+    style="width: 805px; height: 300px;"
+    class="ag-theme-alpine"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs">
+  </ag-grid-angular>
 
-  <button mat-raised-button routerLink="/home" color="primary">
-      Voltar
-  </button>    
+  <button mat-raised-button routerLink="/" color="primary">
+      Fechar
+  </button>   
   
 </mat-card>

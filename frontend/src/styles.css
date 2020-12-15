@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */ 
+@import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+@import "../node_modules/ag-grid-community/dist/styles/ag-grid.css";
+@import "../node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css";
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -18,3 +22,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .div-item-obrigatorio {
     color:#e0120f !important;
 }
+
+.ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #2046c0; /* blue */
+}
+  
+  .ng-invalid:not(form)  {
+    border-left: 5px solid #e0120f; /* red */
+  }

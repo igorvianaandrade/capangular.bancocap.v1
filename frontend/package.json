@@ -23,8 +23,8 @@
     "ag-grid-angular": "^24.1.0",
     "ag-grid-community": "^24.1.0",
     "ng2-currency-mask": "^9.0.2",
-    "object-hash": "^2.0.3",
     "ngx-mask": "^11.1.4",
+    "object-hash": "^2.0.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

@@ -1,48 +1,47 @@
 <mat-card>
     <div *ngIf="transferenciaForm.invalid && transferenciaForm.dirty"
-        class="alert alert-danger div-item-obrigatorio">
+        class="alert alert-danger">
         Preencha todos os campos corretamente!
     </div>
 
-    <mat-card-title>Transferir Dinheiro</mat-card-title>
-    <form  #transferenciaForm="ngForm" 
-    autocomplete="off" >
-        <mat-label class="data-atual">{{dataAtual}}</mat-label>
+    <mat-card-title>Realizar Transferencia</mat-card-title>
+    <form (ngSubmit)="onSubmit(transferenciaForm)" #transferenciaForm="ngForm" autocomplete="off" >
+        <div><b>Data:</b> {{currentDate}}</div>
         <br>
         <mat-form-field>
-            <input matInput placeholder="Hash da Conta de Origem"          
+            <input matInput placeholder="Hash da Conta de origem"          
             required
             [(ngModel)]="transferencia.contaOrigem.hash" name="hashOrigem" #hashOrigem="ngModel"
-            minlength="10" maxlength="10">
+            minlength="40" maxlength="40">
         </mat-form-field>
         <div [hidden]="hashOrigem.valid || hashOrigem.pristine"
-            class="alert alert-danger div-item-obrigatorio">
-            Hash é obrigatóriode 10 caracteres!
+            class="alert alert-danger">
+            Hash da conta de Origem é obrigatório e deve ter 40 caracteres!
         </div>
         <mat-form-field>
             <input matInput placeholder="Hash da conta de destino"            
             required
             [(ngModel)]="transferencia.contaDestino.hash" name="hashDestino" #hashDestino="ngModel"
-            minlength="10" maxlength="10">
+            minlength="40" maxlength="40">
         </mat-form-field>
         <div [hidden]="hashDestino.valid || hashDestino.pristine"
-            class="alert alert-danger div-item-obrigatorio">
-            Hash é obrigatório e deve ter 10 caracteres!
+            class="alert alert-danger">
+            Hash é obrigatório e deve ter 40 caracteres!
         </div>
         <mat-form-field>
-            <input matInput placeholder="R$ 10.00"
+            <input matInput currencyMask placeholder="Valor"
             required
-            min="10"
+            min="1" max="1000.00"
             [(ngModel)]="transferencia.valor" name="valor" #valor="ngModel">
             <div [hidden]="valor.valid || valor.pristine"
-                class="alert alert-danger div-item-obrigatorio">
-                Valor é obrigatório e deve ser de no mínimo R$ 10.00!
+                class="alert alert-danger">
+                Valor é obrigatório e deve ser acima de 0, até R$1.000,00!
             </div>
         </mat-form-field>        
     </form>
 
-    <button type="submit" (click)="transferir()" mat-raised-button [disabled]="!transferenciaForm.form.valid"
-            routerLink = '/transferencia-view' color="primary">
+    <button type="submit" mat-raised-button [disabled]="!transferenciaForm.form.valid"
+            routerLink = {{this.rotaNovaTransferencia}} color="primary">
             Salvar
     </button>
 
