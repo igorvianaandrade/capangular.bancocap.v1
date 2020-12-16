@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ContaService } from 'src/app/services/conta.service';
+import { Router } from '@angular/router';
+import { ClienteService } from 'src/app/services/cliente.service';
 import { Cliente } from 'src/app/model/cliente.model';
 import { Conta } from 'src/app/model/conta.model';
 import * as objectHash from 'object-hash';
@@ -33,7 +36,11 @@ export class ContaComponent implements OnInit {
     { cpf: '5', nome: "Michel"}
   ];
 
-  constructor() { }
+  constructor(
+    private contaService: ContaService,
+    private clienteService: ClienteService,
+    private router: Router) {
+  }
 
   ngOnInit(): void {
   }
@@ -41,10 +48,12 @@ export class ContaComponent implements OnInit {
   onSubmit() { this.submitted = true; }
 
   criarConta(): void {
-    alert("Conta criada com sucesso!");
+    this.contaService.criarContas(this.conta);
+
+    alert("Conta criada com sucesso!");    
     this.encontrarClientePorNome(this.selectedValue)
     this.conta.hash = this.hash;
-    console.log(this.conta);
+    //console.log(this.conta);
   }
 
   encontrarClientePorNome(nome: string) {

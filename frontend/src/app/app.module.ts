@@ -37,6 +37,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { CurrencyMaskConfig, CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
 import { AgGridModule } from 'ag-grid-angular';
 
+import { AppConfig } from './../app/token';
+import { LoggerService } from './services/logger/logger.service';
+
 //Moeda
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: "right",
@@ -51,11 +54,19 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 //Data local
 import { registerLocaleData } from '@angular/common';
 import localeBr from '@angular/common/locales/pt';
+import { ClienteService } from './services/cliente.service';
+import { ContaService } from './services/conta.service';
 registerLocaleData(localeBr, 'pt');
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
+
+const APP_CONFIG: Config = Object.freeze({
+  serviceURL: "http://localhost:3001",
+  IsDevelopmentEnv: true,
+  backgroundColor: "white"
+})
 
 @NgModule({
   declarations: [
@@ -99,7 +110,19 @@ const maskConfig: Partial<IConfig> = {
     
   ],
   providers: [{provide: LOCALE_ID, useValue: 'pt-BR'},
-              { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }],
+              {provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig},
+              {provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig},
+              {provide: LoggerService, useClass: LoggerService},
+              {provide: AppConfig, useValue: APP_CONFIG},
+              {provide: ClienteService, useClass: ClienteService},
+              {provide: ContaService, useClass: ContaService}
+            ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+interface Config {
+  serviceURL?:string,
+  IsDevelopmentEnv?:boolean,
+  backgroundColor?: string
+}

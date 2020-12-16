@@ -73,5 +73,52 @@
       "senha": "12",
       "id": 11
     }
+  ],
+  "clientes": [
+    {
+      "id": 30,
+      "nome": "Igor",
+      "cpf": "123.456.789-11"
+    },
+    {
+      "nome": "asdasdasdasddasdasdasdasdasdasdasdasdasdasdasdasd",
+      "cpf": "12312312323",
+      "id": 31
+    },
+    {
+      "nome": "asdadasdasdasdasdasd",
+      "cpf": "12312312323",
+      "id": 32
+    }
+  ],
+  "contas": [
+    {
+      "id": 10,
+      "hash": "341.000.658-44",
+      "cliente": {
+        "id": 30,
+        "nome": "Igor",
+        "cpf": "123.456.789-11"
+      },
+      "saldo": 20000
+    },
+    {
+      "hash": "",
+      "cliente": {
+        "cpf": "",
+        "nome": ""
+      },
+      "saldo": 10000,
+      "id": 11
+    },
+    {
+      "hash": "",
+      "cliente": {
+        "cpf": "",
+        "nome": ""
+      },
+      "saldo": 10000,
+      "id": 12
+    }
   ]
 }
