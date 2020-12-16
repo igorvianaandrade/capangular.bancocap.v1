@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+//Recursos independentes de componentes como services de log.
 @Injectable({
   providedIn: 'root'
 })

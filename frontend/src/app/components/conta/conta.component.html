@@ -10,7 +10,7 @@
          <mat-form-field appearance="fill">
             <mat-label>Selecione um cliente</mat-label>
             <mat-select required [(ngModel)]="selectedValue" name="nome">
-                <mat-option *ngFor="let cliente of mock_clientes" [value]="cliente.nome">
+                <mat-option *ngFor="let cliente of clientes" [value]="cliente.nome">
                     {{cliente.nome}}
                 </mat-option>
             </mat-select>

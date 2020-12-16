@@ -28,13 +28,7 @@ export class ContaComponent implements OnInit {
     saldo: 0.0
   }
 
-  mock_clientes: Cliente[] = [
-    { cpf: '1', nome: "John" },
-    { cpf: '2', nome: "Mary" },
-    { cpf: '3', nome: "Sophie"},
-    { cpf: '4', nome: "Susan"},
-    { cpf: '5', nome: "Michel"}
-  ];
+  clientes: Cliente[] = [];
 
   constructor(
     private contaService: ContaService,
@@ -42,22 +36,24 @@ export class ContaComponent implements OnInit {
     private router: Router) {
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
+    this.clientes = this.clienteService.obterClientes();
   }
 
   onSubmit() { this.submitted = true; }
 
-  criarConta(): void {
-    this.contaService.criarContas(this.conta);
+  criarConta(): void {    
 
-    alert("Conta criada com sucesso!");    
     this.encontrarClientePorNome(this.selectedValue)
     this.conta.hash = this.hash;
+    this.contaService.criarContas(this.conta);
+
+    alert("Conta criada com sucesso!");
     //console.log(this.conta);
   }
 
   encontrarClientePorNome(nome: string) {
-    for (const client of this.mock_clientes) {
+    for (const client of this.clientes) {
       if( client.nome == this.selectedValue ) {
         this.conta.cliente = client;
         this.hash = objectHash(this.conta);
